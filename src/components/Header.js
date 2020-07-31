@@ -9,8 +9,8 @@ const Header = () => {
       <div onClick={() => history.push("/")}>LOGO</div>
       <div>
         <nav onClick={() => history.push("/characters")}>CHARACTERS</nav>
-        <nav>COMICS</nav>
-        <nav>FAVORITES</nav>
+        <nav onClick={() => history.push("/comics")}>COMICS</nav>
+        <nav onClick={() => history.push("/favorites")}>FAVORITES</nav>
       </div>
     </header>
   );

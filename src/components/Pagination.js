@@ -8,6 +8,7 @@ const Pagination = ({ count, limit, setPage, setOffset }) => {
     const newOffset = (i - 1) * limit;
     buttons.push(
       <button
+        key={i}
         onClick={() => {
           setPage(i);
           setOffset(newOffset);
