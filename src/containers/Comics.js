@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 
+import Loader from "../components/Loader";
 import Header from "../components/Header";
-import SearchName from "../components/SearchName";
 import Pagination from "../components/Pagination";
+import Footer from "../components/Footer";
+import AutocompleteSearch from "../components/AutocompleteSearch";
 
 const Comics = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [comics, setComics] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(50);
-  const [offset, setOffset] = useState(50);
-  const [order, SetOrder] = useState("title");
-
-  const history = useHistory();
+  const [limit] = useState(100);
+  const [offset, setOffset] = useState(0);
+  const [order] = useState("title");
 
   const fetchData = async () => {
     const params = {
@@ -73,41 +72,48 @@ const Comics = () => {
     );
   };
 
+  console.log(comics);
+
   return isLoading ? (
-    <p className="offer">Downloading...</p>
+    <Loader />
   ) : (
     <>
       <Header />
-      {/* <SearchName
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-        comics={comics}
-        setComics={setComics}
-        count={comics.data.total}
-      /> */}
-      {comics.data.results.map((comic) => {
-        return (
-          <div className="comics" key={comic.id}>
-            <img
-              src={`${comic.thumbnail.path}/portrait_fantastic.${comic.thumbnail.extension}`}
-              alt="marvel-comic"
-            />
-            <div>
-              <div>{comic.title}</div>
-              <div>{comic.description}</div>
-              <div onClick={() => addComicToFavorites(comic.id)}>
-                + Ajouter aux favoris
-              </div>
-            </div>
+      <AutocompleteSearch />
+      <div className="main-section-comics">
+        <div className="container">
+          <h1>MARVEL COMICS</h1>
+          <div>
+            {comics.data.results.map((comic) => {
+              return (
+                <div className="comics" key={comic.id}>
+                  <div>
+                    <img
+                      src={`${comic.thumbnail.path}/standard_xlarge.${comic.thumbnail.extension}`}
+                      alt="marvel-comic"
+                    />
+                    <div>
+                      <h2>{comic.title}</h2>
+                    </div>
+                  </div>
+                  <div onClick={() => addComicToFavorites(comic.id)}>
+                    + Ajouter aux favoris
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
-      <Pagination
-        count={comics.data.total}
-        limit={limit}
-        setPage={setPage}
-        setOffset={setOffset}
-      />
+        </div>
+        <div className="page-buttons container">
+          <Pagination
+            count={comics.data.total}
+            limit={limit}
+            setPage={setPage}
+            setOffset={setOffset}
+          />
+        </div>
+      </div>
+      <Footer attributionText={comics.attributionText} />
     </>
   );
 };

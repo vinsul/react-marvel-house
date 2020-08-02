@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
+import Loader from "../components/Loader";
 import Header from "../components/Header";
 import SearchName from "../components/SearchName";
 import Pagination from "../components/Pagination";
+import Footer from "../components/Footer";
 
 const Characters = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(50);
+  const [limit] = useState(50);
   const [offset, setOffset] = useState(50);
-  const [order, SetOrder] = useState("name");
+  const [order] = useState("name");
 
   const history = useHistory();
 
@@ -67,48 +69,63 @@ const Characters = () => {
     const filteredFavoritesCharacters = newFavoriteCharacters.filter(
       (favoriteCharacter) => favoriteCharacter.id !== characterId
     );
-    localStorage.setItem("myFavorites", JSON.stringify(filteredFavoritesCharacters));
+    localStorage.setItem(
+      "myFavorites",
+      JSON.stringify(filteredFavoritesCharacters)
+    );
   };
 
   return isLoading ? (
-    <p className="offer">Downloading...</p>
+    <Loader />
   ) : (
     <>
       <Header />
-      <SearchName
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-        characters={characters}
-        setCharacters={setCharacters}
-        count={characters.data.total}
-      />
-      {characters.data.results.map((character) => {
-        return (
-          <div
-            className="characters"
-            key={character.id}
-            // onClick={() => history.push(`/characters/${character.id}/comics`)}
-          >
-            <img
-              src={`${character.thumbnail.path}/standard_xlarge.${character.thumbnail.extension}`}
-              alt="marvel-character"
-            />
-            <div>
-              <div>{character.name}</div>
-              <div>{character.description}</div>
-              <div onClick={() => addCharacterToFavorites(character.id)}>
-                + Ajouter aux favoris
-              </div>
-            </div>
+      <div className="main-section-characters">
+        {/* <SearchName
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          characters={characters}
+          setCharacters={setCharacters}
+          count={characters.data.total}
+        /> */}
+        <div className="container">
+          <h1>MARVEL CHARACTERS</h1>
+          <div>
+            {characters.data.results.map((character) => {
+              return (
+                <div className="character" key={character.id}>
+                  <div
+                    onClick={() =>
+                      history.push(`/characters/${character.id}/comics`)
+                    }
+                  >
+                    <img
+                      src={`${character.thumbnail.path}/standard_xlarge.${character.thumbnail.extension}`}
+                      alt="marvel-character"
+                    />
+                    <div>
+                      <h2>{character.name}</h2>
+                      <div>{character.description}</div>
+                    </div>
+                  </div>
+                  <div onClick={() => addCharacterToFavorites(character.id)}>
+                    + Add to favorites
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
-      <Pagination
-        count={characters.data.total}
-        limit={limit}
-        setPage={setPage}
-        setOffset={setOffset}
-      />
+        </div>
+        <div className="page-buttons">
+          <Pagination
+            count={characters.data.total}
+            limit={limit}
+            setPage={setPage}
+            setOffset={setOffset}
+          />
+        </div>
+      </div>
+      <Footer attributionText={characters.attributionText} />
     </>
   );
 };

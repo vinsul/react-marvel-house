@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
-import Home from "./containers/Home";
+// import Home from "./containers/Home";
 import Characters from "./containers/Characters";
 import CharacterComics from "./containers/CharacterComics";
 import Comics from "./containers/Comics";
@@ -25,9 +25,9 @@ function App() {
           <Route path="/favorites">
             <Favorites />
           </Route>
-          <Route path="/">
+          {/* <Route path="/">
             <Home />
-          </Route>
+          </Route> */}
         </Switch>
       </Router>
     </div>
