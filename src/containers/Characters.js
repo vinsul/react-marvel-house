@@ -12,8 +12,8 @@ const Characters = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit] = useState(50);
-  const [offset, setOffset] = useState(50);
+  const [limit] = useState(100);
+  const [offset, setOffset] = useState(0);
   const [order] = useState("name");
 
   const history = useHistory();
@@ -56,24 +56,24 @@ const Characters = () => {
     if (newFavoriteCharacter) {
       newFavoriteCharacter.category = "character";
       newFavoriteCharacters.push(newFavoriteCharacter);
-      console.log(newFavoriteCharacters);
     }
+    
     localStorage.setItem("myFavorites", JSON.stringify(newFavoriteCharacters));
   };
 
-  const removeCharacterToFavorites = (characterId) => {
-    const favoritesStored = JSON.parse(localStorage.getItem("myFavorites"));
+  // const removeCharacterToFavorites = (characterId) => {
+  //   const favoritesStored = JSON.parse(localStorage.getItem("myFavorites"));
 
-    let newFavoriteCharacters = [...favoritesStored];
+  //   let newFavoriteCharacters = [...favoritesStored];
 
-    const filteredFavoritesCharacters = newFavoriteCharacters.filter(
-      (favoriteCharacter) => favoriteCharacter.id !== characterId
-    );
-    localStorage.setItem(
-      "myFavorites",
-      JSON.stringify(filteredFavoritesCharacters)
-    );
-  };
+  //   const filteredFavoritesCharacters = newFavoriteCharacters.filter(
+  //     (favoriteCharacter) => favoriteCharacter.id !== characterId
+  //   );
+  //   localStorage.setItem(
+  //     "myFavorites",
+  //     JSON.stringify(filteredFavoritesCharacters)
+  //   );
+  // };
 
   return isLoading ? (
     <Loader />
@@ -81,14 +81,13 @@ const Characters = () => {
     <>
       <Header />
       <div className="main-section-characters">
-        {/* <SearchName
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-          characters={characters}
-          setCharacters={setCharacters}
-          count={characters.data.total}
-        /> */}
         <div className="container">
+          <SearchName
+            setCharacters={setCharacters}
+            order={order}
+            limit={limit}
+            offset={offset}
+          />
           <h1>MARVEL CHARACTERS</h1>
           <div>
             {characters.data.results.map((character) => {
@@ -116,7 +115,7 @@ const Characters = () => {
             })}
           </div>
         </div>
-        <div className="page-buttons">
+        <div className="page-buttons container">
           <Pagination
             count={characters.data.total}
             limit={limit}

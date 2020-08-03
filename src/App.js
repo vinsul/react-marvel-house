@@ -2,11 +2,13 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
-// import Home from "./containers/Home";
+import Home from "./containers/Home";
+import SignUp from "./containers/SignUp";
+import LogIn from "./containers/LogIn";
 import Characters from "./containers/Characters";
 import CharacterComics from "./containers/CharacterComics";
 import Comics from "./containers/Comics";
-import Favorites from "./containers/Favorites"
+import Favorites from "./containers/Favorites";
 
 function App() {
   return (
@@ -25,9 +27,15 @@ function App() {
           <Route path="/favorites">
             <Favorites />
           </Route>
-          {/* <Route path="/">
+          <Route path="/sign_up">
+            <SignUp />
+          </Route>
+          <Route path="/log_in">
+            <LogIn />
+          </Route>
+          <Route path="/">
             <Home />
-          </Route> */}
+          </Route>
         </Switch>
       </Router>
     </div>

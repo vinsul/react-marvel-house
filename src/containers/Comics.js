@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Loader from "../components/Loader";
+import SearchTitle from "../components/SearchTitle";
 import Header from "../components/Header";
 import Pagination from "../components/Pagination";
 import Footer from "../components/Footer";
-import AutocompleteSearch from "../components/AutocompleteSearch";
 
 const Comics = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -53,7 +53,6 @@ const Comics = () => {
     if (newFavoriteComic) {
       newFavoriteComic.category = "comic";
       newFavoriteComics.push(newFavoriteComic);
-      console.log(newFavoriteComics);
     }
     localStorage.setItem("myFavorites", JSON.stringify(newFavoriteComics));
   };
@@ -72,16 +71,19 @@ const Comics = () => {
     );
   };
 
-  console.log(comics);
-
   return isLoading ? (
     <Loader />
   ) : (
     <>
       <Header />
-      <AutocompleteSearch />
       <div className="main-section-comics">
         <div className="container">
+          <SearchTitle
+            setComics={setComics}
+            order={order}
+            limit={limit}
+            offset={offset}
+          />
           <h1>MARVEL COMICS</h1>
           <div>
             {comics.data.results.map((comic) => {

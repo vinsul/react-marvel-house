@@ -11,17 +11,21 @@ const Home = () => {
   const [lastEvents, setLastEvents] = useState([]);
 
   const fetchData = async () => {
-    const comicsResponse = await Axios.get(
-      `http://gateway.marvel.com/v1/public/comics?orderBy=-focDate&limit=10&${process.env.REACT_APP_MARVEL_API_KEY}`
-    );
-    setLastComics(comicsResponse.data);
+    try {
+      const comicsResponse = await Axios.get(
+        `http://gateway.marvel.com/v1/public/comics?orderBy=-focDate&limit=10&${process.env.REACT_APP_MARVEL_API_KEY}`
+      );
+      setLastComics(comicsResponse.data);
 
-    const eventsResponse = await Axios.get(
-      `http://gateway.marvel.com/v1/public/events?orderBy=-startDate&limit=10&${process.env.REACT_APP_MARVEL_API_KEY}`
-    );
-    setLastEvents(eventsResponse.data);
+      const eventsResponse = await Axios.get(
+        `http://gateway.marvel.com/v1/public/events?orderBy=-startDate&limit=10&${process.env.REACT_APP_MARVEL_API_KEY}`
+      );
+      setLastEvents(eventsResponse.data);
 
-    setIsLoading(false);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   useEffect(() => {

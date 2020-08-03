@@ -5,9 +5,9 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const SearchName = ({ setCharacters, order, limit, offset }) => {
-  const [searchName, setSearchName] = useState("");
-  const [debouncedName] = useDebounce(searchName, 1000);
+const SearchTitle = ({ setComics, order, limit, offset }) => {
+  const [searchTitle, setSearchTitle] = useState("");
+  const [debouncedTitle] = useDebounce(searchTitle, 1000);
   const [totalFound, setTotalFound] = useState(0);
   const [debouncedTotal] = useDebounce(totalFound, 1000);
 
@@ -15,47 +15,47 @@ const SearchName = ({ setCharacters, order, limit, offset }) => {
     orderBy: order,
     limit,
     offset,
-    name: searchName,
+    title: searchTitle,
   };
 
-  if (!searchName) {
-    delete params.name;
+  if (!searchTitle) {
+    delete params.title;
   }
 
   const queryString = Object.keys(params)
     .map((key) => `${key}=${params[key]}`)
     .join("&");
 
-  const handleNameInputChange = (event) => {
-    setSearchName(event.target.value);
+  const handleTitleInputChange = (event) => {
+    setSearchTitle(event.target.value);
   };
 
   const fetchData = async () => {
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/characters?${queryString}&${process.env.REACT_APP_MARVEL_API_KEY}`
+      `http://gateway.marvel.com/v1/public/comics?${queryString}&${process.env.REACT_APP_MARVEL_API_KEY}`
     );
-    setCharacters(response.data);
+    setComics(response.data);
     setTotalFound(response.data.data.total);
   };
 
   useEffect(() => {
     fetchData();
-  }, [debouncedName]);
+  }, [debouncedTitle]);
 
   return (
     <div className="search-bar">
       <div>
         <input
           type="text"
-          placeholder="Search for a character"
-          value={searchName}
-          onChange={handleNameInputChange}
+          placeholder="Search for a comic"
+          value={searchTitle}
+          onChange={handleTitleInputChange}
         />
         <FontAwesomeIcon icon={faSearch} />
       </div>
-      {debouncedName && <div>Found {debouncedTotal} result(s)</div>}
+      {debouncedTitle && <div>Found {debouncedTotal} result(s)</div>}
     </div>
   );
 };
 
-export default SearchName;
+export default SearchTitle;

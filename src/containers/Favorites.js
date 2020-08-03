@@ -1,9 +1,20 @@
 import React from "react";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Favorites = () => {
   const favoritesList = JSON.parse(localStorage.getItem("myFavorites"));
 
+  if (!favoritesList) {
+    return (
+      <div className="empty-favorites">
+        <Header />
+        <div>You don't have any favorites yet</div>
+        <Footer />
+      </div>
+    );
+  }
+  
   const favoriteComics = favoritesList.filter(
     (favoriteComic) => favoriteComic.category === "comic"
   );
@@ -21,7 +32,6 @@ const Favorites = () => {
         <div className="container">
           <h1>YOUR FAVORITES</h1>
           <h2>Your favorites comics</h2>
-          {/* {!favoritesList ? <span>Your favorite list is empty.</span> :  */}
           <div>
             {favoriteComics.map((favoriteComic, index) => {
               return (
