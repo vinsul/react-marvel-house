@@ -30,7 +30,7 @@ const Characters = () => {
       .join("&");
 
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/characters?${queryString}&${process.env.REACT_APP_MARVEL_API_KEY}`
+      `https://gateway.marvel.com/v1/public/characters?${queryString}&${process.env.REACT_APP_MARVEL_API_KEY}`
     );
     setCharacters(response.data);
     setIsLoading(false);

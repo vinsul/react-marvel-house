@@ -13,12 +13,12 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const comicsResponse = await Axios.get(
-        `http://gateway.marvel.com/v1/public/comics?orderBy=-focDate&limit=10&${process.env.REACT_APP_MARVEL_API_KEY}`
+        `https://gateway.marvel.com/v1/public/comics?orderBy=-focDate&limit=10&${process.env.REACT_APP_MARVEL_API_KEY}`
       );
       setLastComics(comicsResponse.data);
 
       const eventsResponse = await Axios.get(
-        `http://gateway.marvel.com/v1/public/events?orderBy=-startDate&limit=10&${process.env.REACT_APP_MARVEL_API_KEY}`
+        `https://gateway.marvel.com/v1/public/events?orderBy=-startDate&limit=10&${process.env.REACT_APP_MARVEL_API_KEY}`
       );
       setLastEvents(eventsResponse.data);
 

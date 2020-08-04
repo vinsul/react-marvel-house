@@ -29,7 +29,7 @@ const CharacterComics = () => {
       .join("&");
 
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/characters/${id}/comics?orderBy=title&${queryString}&${process.env.REACT_APP_MARVEL_API_KEY}`
+      `https://gateway.marvel.com/v1/public/characters/${id}/comics?orderBy=title&${queryString}&${process.env.REACT_APP_MARVEL_API_KEY}`
     );
     setCharactersComics(response.data);
     setIsLoading(false);
