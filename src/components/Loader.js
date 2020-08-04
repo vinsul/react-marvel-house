@@ -5,7 +5,7 @@ const Loader = () => {
   return (
     <SolarSystemLoading
       className="download-message"
-      color="red"
+      color="yellow"
       size="large"
     />
   );

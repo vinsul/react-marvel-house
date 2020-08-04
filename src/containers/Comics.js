@@ -57,19 +57,19 @@ const Comics = () => {
     localStorage.setItem("myFavorites", JSON.stringify(newFavoriteComics));
   };
 
-  const removeComicToFavorites = (comicId) => {
-    const favoritesStored = JSON.parse(localStorage.getItem("myFavorites"));
+  // const removeComicToFavorites = (comicId) => {
+  //   const favoritesStored = JSON.parse(localStorage.getItem("myFavorites"));
 
-    let newFavoriteComics = [...favoritesStored];
+  //   let newFavoriteComics = [...favoritesStored];
 
-    const filteredFavoritesComics = newFavoriteComics.filter(
-      (favoriteComic) => favoriteComic.id !== comicId
-    );
-    localStorage.setItem(
-      "myFavorites",
-      JSON.stringify(filteredFavoritesComics)
-    );
-  };
+  //   const filteredFavoritesComics = newFavoriteComics.filter(
+  //     (favoriteComic) => favoriteComic.id !== comicId
+  //   );
+  //   localStorage.setItem(
+  //     "myFavorites",
+  //     JSON.stringify(filteredFavoritesComics)
+  //   );
+  // };
 
   return isLoading ? (
     <Loader />
