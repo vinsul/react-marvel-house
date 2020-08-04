@@ -110,6 +110,7 @@ const Comics = () => {
           <Pagination
             count={comics.data.total}
             limit={limit}
+            page={page}
             setPage={setPage}
             setOffset={setOffset}
           />

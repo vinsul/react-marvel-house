@@ -31,7 +31,6 @@ const LogIn = () => {
       setUser({ token: token });
 
       history.push("/");
-
     } catch (error) {
       console.log(error.message);
     }
@@ -41,8 +40,7 @@ const LogIn = () => {
     <>
       <Header />
       <div className="login-main">
-        <div className="container">
-          <div></div>
+        <div className="login-form">
           <form onSubmit={(event) => handleLogInSubmit(event)}>
             <h2>LOG IN WITH YOUR EMAIL</h2>
             <div>
@@ -61,21 +59,26 @@ const LogIn = () => {
                 onChange={(event) => setPassword(event.target.value)}
               />
             </div>
-            <button type="submit">Se connecter</button>
+            <button type="submit">LOG IN</button>
           </form>
-          <h3>YOU HAVE NO ACCOUNT AND YOU WANT TO SIGN IN ?</h3>
-          <button
-            type="button"
-            className="create-account-button"
-            onClick={() => history.push("/sign_up")}
-          >
-            CREATE AN ACCOUNT
-          </button>
+          <div>
+            <h2>
+              YOU HAVE NO ACCOUNT <br />
+              AND YOU WANT TO SIGN IN ?
+            </h2>
+            <button
+              type="button"
+              className="create-account-button"
+              onClick={() => history.push("/sign_up")}
+            >
+              CREATE AN ACCOUNT
+            </button>
+          </div>
         </div>
       </div>
       <Footer />
     </>
   );
-}
+};
 
 export default LogIn;

@@ -43,61 +43,60 @@ function SignUp() {
     <>
       <Header />
       <div className="main-signup">
-        <form
-          className="sign-up-form container"
-          onSubmit={(event) => handleSignUpSubmit(event)}
-        >
-          <h2>Create an account</h2>
-          <div className="signup-right-side">
-            <div>
-              <input
-                type="text"
-                value={username}
-                placeholder="Username"
-                onChange={(event) => setUsername(event.target.value)}
-              />
-              <input
-                type="text"
-                value={firstname}
-                placeholder="First Name"
-                onChange={(event) => setFirstname(event.target.value)}
-              />
-              <input
-                type="text"
-                value={lastname}
-                placeholder="Last Name"
-                onChange={(event) => setLastname(event.target.value)}
-              />
-              <input
-                type="email"
-                value={email}
-                placeholder="Email Address"
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </div>
-            <div className="signup-right-side-password">
-              <input
-                type="password"
-                value={password}
-                placeholder="Password"
-                onChange={(event) => setPassword(event.target.value)}
-              />
-              <input
-                className={errorPassword ? "error" : "ok"}
-                type="password"
-                value={confirmPassword}
-                placeholder="Confirm your password"
-                onChange={(event) => setConfirmPassword(event.target.value)}
-              />
-              {errorPassword && (
-                <span className="error-message">
-                  The passwords do not match.
-                </span>
-              )}
-            </div>
-            <button type="submit">CREATE ACCOUNT</button>
-          </div>
-        </form>
+        <div className="sign-up-form">
+          <form
+            onSubmit={(event) => handleSignUpSubmit(event)}
+          >
+            <h2>Create an account</h2>
+              <div>
+                <input
+                  type="text"
+                  value={username}
+                  placeholder="Username"
+                  onChange={(event) => setUsername(event.target.value)}
+                />
+                <input
+                  type="text"
+                  value={firstname}
+                  placeholder="First Name"
+                  onChange={(event) => setFirstname(event.target.value)}
+                />
+                <input
+                  type="text"
+                  value={lastname}
+                  placeholder="Last Name"
+                  onChange={(event) => setLastname(event.target.value)}
+                />
+                <input
+                  type="email"
+                  value={email}
+                  placeholder="Email Address"
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </div>
+              <div className="signup-right-side-password">
+                <input
+                  type="password"
+                  value={password}
+                  placeholder="Password"
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+                <input
+                  className={errorPassword ? "error" : "ok"}
+                  type="password"
+                  value={confirmPassword}
+                  placeholder="Confirm your password"
+                  onChange={(event) => setConfirmPassword(event.target.value)}
+                />
+                {errorPassword && (
+                  <span className="error-message">
+                    The passwords do not match.
+                  </span>
+                )}
+              </div>
+              <button type="submit">CREATE ACCOUNT</button>
+          </form>
+        </div>
       </div>
       <Footer />
     </>

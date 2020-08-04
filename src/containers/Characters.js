@@ -57,7 +57,7 @@ const Characters = () => {
       newFavoriteCharacter.category = "character";
       newFavoriteCharacters.push(newFavoriteCharacter);
     }
-    
+
     localStorage.setItem("myFavorites", JSON.stringify(newFavoriteCharacters));
   };
 
@@ -119,6 +119,7 @@ const Characters = () => {
           <Pagination
             count={characters.data.total}
             limit={limit}
+            page={page}
             setPage={setPage}
             setOffset={setOffset}
           />

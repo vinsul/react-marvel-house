@@ -50,10 +50,7 @@ const CharacterComics = () => {
           <div>
             {charactersComics.data.results.map((charactersComic) => {
               return (
-                <div
-                  className="charactersComic"
-                  key={charactersComic.id}
-                >
+                <div className="charactersComic" key={charactersComic.id}>
                   <div>
                     <img
                       src={`${charactersComic.thumbnail.path}/standard_xlarge.${charactersComic.thumbnail.extension}`}
@@ -73,6 +70,7 @@ const CharacterComics = () => {
           <Pagination
             count={charactersComics.data.total}
             limit={charactersComics.data.limit}
+            page={page}
             setPage={setPage}
             setOffset={setOffset}
           />
