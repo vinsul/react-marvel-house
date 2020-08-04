@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
   const history = useHistory();
 
